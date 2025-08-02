@@ -1,0 +1,51 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Stream or JSON API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "NDJSONストリームまたはJSONを返す",
+        "responses": {
+          "200": {
+            "description": "application/x-ndjson または application/json のいずれかを返す",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": { "type": "integer" },
+                          "value": { "type": "string" }
+                        },
+                        "required": ["id", "value"]
+                      }
+                    }
+                  },
+                  "required": ["items"]
+                }
+              },
+              "application/x-ndjson": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "integer" },
+                    "value": { "type": "string" }
+                  },
+                  "required": ["id", "value"],
+                  "description": "改行区切りJSON (NDJSON) ストリーム"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
